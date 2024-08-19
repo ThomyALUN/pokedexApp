@@ -20,7 +20,10 @@ export default function PokedexNavigation() {
                 name="Pokemon"
                 component={Pokemon}
                 options={{
-                    title: 'Pokemon'
+                    title: '',
+                    headerShown: true,
+                    headerTransparent: true,
+                    headerShadowVisible: false,
                 }}
             />
         </Stack.Navigator>
