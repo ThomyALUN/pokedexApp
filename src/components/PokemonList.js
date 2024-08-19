@@ -4,9 +4,6 @@ import React from 'react'
 import PokemonCard from './PokemonCard'
 
 export default function PokemonList({pokemons, loadPokemons, isNext}) {
-    console.log(pokemons)
-
-    console.log(Platform.OS)
 
     const loadMorePokemons = () => {
         loadPokemons()

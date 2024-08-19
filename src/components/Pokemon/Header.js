@@ -6,12 +6,9 @@ import getColorByType from '../../utils/getColorByType'
 
 export default function Header({name, id, firstType, image}) {
 
-	console.log(name, id, firstType, image)
-
 	const color = getColorByType(firstType)
 	const bgStyles = { backgroundColor: color, ...styles.bg }
 
-	console.log(image)
 	return (
 		<>
 			<View style={bgStyles}/>

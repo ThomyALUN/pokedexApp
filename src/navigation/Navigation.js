@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from 'react-native'
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "@expo/vector-icons/FontAwesome5";
 
 import pokeball from "../assets/pokeball.png";
 import AccountNavigation from "./AccountNavigation";
@@ -41,7 +41,8 @@ export default function Navigation() {
                         tabBarLabel: 'Mi cuenta',
                         tabBarIcon: ( { color, size } ) => (
                             <Icon name="user" size={size} color={color} />
-                        )
+                        ),
+                        headerShown: false
                     }
                 }
             />
