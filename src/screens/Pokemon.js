@@ -6,23 +6,20 @@ import Type from '../components/Pokemon/Type'
 import Stats from '../components/Pokemon/Stats'
 import Header from '../components/Pokemon/Header'
 import { getPokemonDetailsApi } from '../api/pokemon'
+import Favorite from '../components/Pokemon/Favorite';
+import useAuth from '../hooks/useAuth';
 
 export default function Pokemon({ navigation, route }) {
 
+    const { auth } = useAuth()
     const { params: {id} } = route
     const [pokemon, setPokemon] = useState(null)
 
     useEffect(() => {
         navigation.setOptions({
-            headerRight: () => (
-                <Icon 
-                    name="heart" 
-                    color="#fff" 
-                    size={20}
-                    style={{marginRight: 10}}
-                    onPress={() => alert('Favorito')}
-                />
-            ),
+            headerRight: () => 
+                auth ? <Favorite id={id}/> : null 
+            ,
             headerLeft: () => (
                 <Icon 
                     name="arrow-left" 
@@ -33,7 +30,7 @@ export default function Pokemon({ navigation, route }) {
                 />
             )
         }) 
-    },[navigation, id])
+    },[navigation, id, auth])
 
     useEffect(() => {
         (

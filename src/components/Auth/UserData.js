@@ -1,12 +1,31 @@
+import React ,{ useCallback, useState } from 'react'
+import { useFocusEffect } from '@react-navigation/native'
 import { View, Text, StyleSheet, Pressable } from 'react-native'
-import React from 'react'
 
 import useAuth from '../../hooks/useAuth'
+import { countPokemonsFavoriteApi } from '../../api/favorite'
 
 export default function UserData() {
 
     const { auth, logout } = useAuth()
 
+    const [favCount, setFavCount] = useState(null)
+
+    const getCountPokemonsFavorite = async () => {
+        try {
+            const count = await countPokemonsFavoriteApi()
+            setFavCount(count)
+        } catch (error) {
+            setFavCount(0)
+        }
+    }
+
+    useFocusEffect(
+        useCallback(() => {
+            getCountPokemonsFavorite()
+        }, [])
+    )
+    
     return (
         <View style={styles.content}>
             <View style={styles.titleBlock}>
@@ -17,7 +36,7 @@ export default function UserData() {
                 <ItemMenu title="Nombre" text={`${auth.firstName} ${auth.lastName}`} />
                 <ItemMenu title="Username" text={auth.username} />
                 <ItemMenu title="Email" text={auth.email} />
-                <ItemMenu title="Total de favoritos" text={0} />
+                <ItemMenu title="Total de favoritos" text={favCount} />
             </View>
             <Pressable onPress={logout} style={styles.btnLogout}>
                 <Text style={styles.logoutText}>Desconectarse</Text>
